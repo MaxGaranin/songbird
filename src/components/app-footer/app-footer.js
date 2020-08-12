@@ -1,9 +1,10 @@
 import React from 'react';
 import './app-footer.css';
 
-const AppFooter = () => {
+const AppFooter = ({ onNextLevelClick }) => {
   return (
-    <div className='app-footer'>
+    <div className="app-footer">
+      <button onClick={onNextLevelClick}>Next level</button>
     </div>
   );
 };
