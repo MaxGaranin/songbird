@@ -142,6 +142,7 @@ class App extends Component {
       targetBird,
       score,
       currentBird,
+      isLevelGuessed,
       isFinal,
     } = this.state;
 
@@ -160,7 +161,7 @@ class App extends Component {
         <div className="app">
           <AppHeader score={score} />
           <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
-          <QuestionPanel bird={targetBird} />
+          <QuestionPanel targetBird={targetBird} isLevelGuessed={isLevelGuessed} />
           <div>
             <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
             <BirdInfoPanel currentBird={currentBird} />
