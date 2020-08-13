@@ -1,6 +1,6 @@
 import React from 'react';
 import './question-panel.css';
-import stubImage from './stub-bird.jpg';
+import stubImage from './../../assets/img/stub-bird.jpg';
 
 const QuestionPanel = ({bird}) => {
   return (

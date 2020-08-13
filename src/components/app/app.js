@@ -26,6 +26,7 @@ const maxBirdId = 6;
 const minLevelIndex = 0;
 const maxLevelIndex = 5;
 const maxLevelScore = 5;
+const maxScore = maxLevelScore * (maxLevelIndex - minLevelIndex + 1);
 
 class App extends Component {
   state = {
@@ -35,6 +36,9 @@ class App extends Component {
     levels,
     currentLevelIndex: minLevelIndex,
     ...this.getCurrentLevelBirdsInfo(minLevelIndex),
+    isLevelGuessed: false,
+    currentBird: null,
+    isFinal: false,
   };
 
   getCurrentLevelBirdsInfo(currentLevelIndex) {
@@ -47,26 +51,60 @@ class App extends Component {
   }
 
   nextLevelHandler = () => {
-    this.setState(({ currentLevelIndex }) => {
+    this.setState(({ currentLevelIndex, levelScore, isLevelGuessed, isFinal }) => {
       currentLevelIndex++;
-      if (currentLevelIndex > maxLevelIndex) currentLevelIndex = minLevelIndex;
+      if (currentLevelIndex > maxLevelIndex) {
+        currentLevelIndex--;
+        isFinal = true;
+      }
 
       const birdsInfo = this.getCurrentLevelBirdsInfo(currentLevelIndex);
-      const levelScore = maxLevelScore;
+      levelScore = maxLevelScore;
+      isLevelGuessed = false;
 
-      return { currentLevelIndex, levelScore, ...birdsInfo };
+      return { currentLevelIndex, ...birdsInfo, levelScore, isLevelGuessed, isFinal };
+    });
+  };
+
+  startQuizHandler = () => {
+    this.setState(() => {
+      const currentLevelIndex = minLevelIndex;
+      const birdsInfo = this.getCurrentLevelBirdsInfo(currentLevelIndex);
+      const levelScore = maxLevelScore;
+      const score = 0;
+      const isLevelGuessed = false;
+      const isFinal = false;
+      return {
+        currentLevelIndex,
+        ...birdsInfo,
+        levelScore,
+        score,
+        isLevelGuessed,
+        isFinal,
+      };
     });
   };
 
   birdClickHandler = (id) => {
-    this.setState(({ birds, targetBird, score, levelScore }) => {
-      const idx = birds.findIndex((bird) => bird.id === id);
+    const { isLevelGuessed, birds } = this.state;
 
+    const idx = birds.findIndex((bird) => bird.id === id);
+    const currentBird = birds[idx];
+
+    if (isLevelGuessed) {
+      this.setState((prev) => {
+        return { ...prev, currentBird };
+      });
+      return;
+    }
+
+    this.setState(({ targetBird, score, levelScore, isLevelGuessed }) => {
       const oldItem = birds[idx];
 
       const status = oldItem.id === targetBird.id ? 1 : -1;
       if (status > 0) {
         score += levelScore;
+        isLevelGuessed = true;
       } else {
         levelScore--;
       }
@@ -78,7 +116,14 @@ class App extends Component {
         newItem,
         ...birds.slice(idx + 1),
       ];
-      return { birds: newBirds, score, levelScore };
+
+      return {
+        birds: newBirds,
+        score,
+        levelScore,
+        isLevelGuessed,
+        currentBird,
+      };
     });
   };
 
@@ -90,20 +135,40 @@ class App extends Component {
   }
 
   render() {
-    const { levels, currentLevelIndex, birds, targetBird, score } = this.state;
+    const {
+      levels,
+      currentLevelIndex,
+      birds,
+      targetBird,
+      score,
+      currentBird,
+      isFinal,
+    } = this.state;
 
-    return (
-      <div className="app">
-        <AppHeader score={score} />
-        <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
-        <QuestionPanel bird={targetBird} />
-        <div>
-          <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
-          <BirdInfoPanel />
+    if (isFinal) {
+      return (
+        <div className="congratulation-panel">
+          <h1>Поздравляем!</h1>
+          <div>
+            Вы прошли викторину и набрали {score} из {maxScore} возможных баллов
+          </div>
+          <button onClick={this.startQuizHandler}>Попробовать еще раз!</button>
         </div>
-        <AppFooter onNextLevelClick={this.nextLevelHandler} />
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="app">
+          <AppHeader score={score} />
+          <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
+          <QuestionPanel bird={targetBird} />
+          <div>
+            <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
+            <BirdInfoPanel currentBird={currentBird} />
+          </div>
+          <AppFooter onNextLevelClick={this.nextLevelHandler} />
+        </div>
+      );
+    }
   }
 }
 
