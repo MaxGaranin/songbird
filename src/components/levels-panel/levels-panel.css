@@ -1,9 +1,0 @@
-.bird-item {
-    display: inline;
-    background-color: #008966;
-    padding: 1rem;
-}
-
-.bird-item.active {
-    background-color: #00bc8c;
-}

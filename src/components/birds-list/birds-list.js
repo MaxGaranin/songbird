@@ -1,32 +1,36 @@
 import React from 'react';
 
-import './birds-list.css';
+import './birds-list.scss';
 
-const BirdsList = ({birds, onBirdClick}) => {
+const BirdsList = ({ birds, onBirdClick }) => {
   const items = birds.map((bird) => {
     let classNames = 'birds-list-item__status';
-      switch (bird.status) {
-        case 0:         
-          break;
-        case -1:
-          classNames += ' false';
-          break;
-        case 1:
-          classNames += ' true';
-          break;
-        default:
-          break;
-      }
+    switch (bird.status) {
+      case 0:
+        break;
+      case -1:
+        classNames += ' false';
+        break;
+      case 1:
+        classNames += ' true';
+        break;
+      default:
+        break;
+    }
 
-    return (   
-      <li key={bird.id} className="birds-list-item" onClick={() => onBirdClick(bird.id)}>
-        <span className={classNames}>&nbsp;&nbsp;&nbsp;</span>
-        <span>{bird.name}</span>
+    return (
+      <li
+        className="birds-list-item"
+        key={bird.id}
+        onClick={() => onBirdClick(bird.id)}
+      >
+        <span className={classNames}></span>
+        <span className="birds-list-item__name">{bird.name}</span>
       </li>
     );
   });
 
-  return <ul className="birds-list">{items}</ul>;  
+  return <ul className="birds-list">{items}</ul>;
 };
 
 export default BirdsList;

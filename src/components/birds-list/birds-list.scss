@@ -1,0 +1,33 @@
+.birds-list {
+  flex: 1 1 50%;
+  margin: 10px;
+  padding: 0;
+  border: 0 solid silver;
+  border-width: 0 0 1px 1px;
+}
+
+.birds-list-item {
+  list-style-type: none;
+  cursor: pointer;
+  padding: 10px;
+  border: 0 solid silver;
+  border-width: 1px 1px 0 0;
+}
+
+.birds-list-item__status {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%; 
+  background-color: gray;
+  &.true {
+    background-color: green;
+  }  
+  &.false {
+    background-color: red;
+  }
+}
+
+.birds-list-item__name {
+  margin-left: 20px;
+}

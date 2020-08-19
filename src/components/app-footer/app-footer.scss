@@ -1,0 +1,11 @@
+.app-footer {
+  cursor: pointer;
+  border: 1px solid silver;
+  border-radius: 5px;
+  margin: 0 10px;
+  text-align: center;
+  padding: 5px;
+  &.active {
+    background-color: #008966;
+  }
+}

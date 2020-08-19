@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './levels-panel.css';
+import './levels-panel.scss';
 
 const LevelsPanel = ({ levels, currentLevelIndex }) => {
   
   const items = levels.map((level, index) => {
-    let classNames = 'bird-item';
+    let classNames = 'level-item';
     if (index === currentLevelIndex) {
       classNames += ' active';
     }

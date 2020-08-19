@@ -10,7 +10,7 @@ import { getRandomIntInclusive } from './../../utils/utils';
 
 import winAudio from './../../assets/audio/win.mp3';
 import errorAudio from './../../assets/audio/error.mp3';
-import './app.css';
+import './app.scss';
 
 const levels = [
   { id: 1, title: 'Разминка' },
@@ -36,8 +36,8 @@ class App extends Component {
     levels,
     currentLevelIndex: minLevelIndex,
     ...this.getCurrentLevelBirdsInfo(minLevelIndex),
-    isLevelGuessed: false,
     currentBird: null,
+    isLevelGuessed: false,
     isFinal: false,
   };
 
@@ -51,19 +51,31 @@ class App extends Component {
   }
 
   nextLevelHandler = () => {
-    this.setState(({ currentLevelIndex, levelScore, isLevelGuessed, isFinal }) => {
-      currentLevelIndex++;
-      if (currentLevelIndex > maxLevelIndex) {
-        currentLevelIndex--;
-        isFinal = true;
+    if (!this.state.isLevelGuessed) return;
+
+    this.setState(
+      ({ currentLevelIndex, levelScore, currentBird, isLevelGuessed, isFinal }) => {
+        currentLevelIndex++;
+        if (currentLevelIndex > maxLevelIndex) {
+          currentLevelIndex--;
+          isFinal = true;
+        }
+
+        const birdsInfo = this.getCurrentLevelBirdsInfo(currentLevelIndex);
+        levelScore = maxLevelScore;
+        isLevelGuessed = false;
+        currentBird = null;
+
+        return {
+          currentLevelIndex,
+          ...birdsInfo,
+          levelScore,
+          currentBird,
+          isLevelGuessed,
+          isFinal,
+        };
       }
-
-      const birdsInfo = this.getCurrentLevelBirdsInfo(currentLevelIndex);
-      levelScore = maxLevelScore;
-      isLevelGuessed = false;
-
-      return { currentLevelIndex, ...birdsInfo, levelScore, isLevelGuessed, isFinal };
-    });
+    );
   };
 
   startQuizHandler = () => {
@@ -72,6 +84,7 @@ class App extends Component {
       const birdsInfo = this.getCurrentLevelBirdsInfo(currentLevelIndex);
       const levelScore = maxLevelScore;
       const score = 0;
+      const currentBird = null;
       const isLevelGuessed = false;
       const isFinal = false;
       return {
@@ -79,6 +92,7 @@ class App extends Component {
         ...birdsInfo,
         levelScore,
         score,
+        currentBird,
         isLevelGuessed,
         isFinal,
       };
@@ -146,30 +160,48 @@ class App extends Component {
       isFinal,
     } = this.state;
 
-    if (isFinal) {
-      return (
-        <div className="congratulation-panel">
-          <h1>Поздравляем!</h1>
-          <div>
-            Вы прошли викторину и набрали {score} из {maxScore} возможных баллов
-          </div>
-          <button onClick={this.startQuizHandler}>Попробовать еще раз!</button>
+    const workPanel = (
+      <>
+        <QuestionPanel
+          targetBird={targetBird}
+          isLevelGuessed={isLevelGuessed}
+        />
+        <div className="birds-panel">
+          <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
+          <BirdInfoPanel currentBird={currentBird} />
         </div>
-      );
-    } else {
-      return (
-        <div className="app">
-          <AppHeader score={score} />
-          <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
-          <QuestionPanel targetBird={targetBird} isLevelGuessed={isLevelGuessed} />
-          <div>
-            <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
-            <BirdInfoPanel currentBird={currentBird} />
-          </div>
-          <AppFooter onNextLevelClick={this.nextLevelHandler} />
+        <AppFooter
+          isLevelGuessed={isLevelGuessed}
+          onNextLevelClick={this.nextLevelHandler}
+        />
+      </>
+    );
+
+    const congratulationPanel = (
+      <div className="congratulation-panel">
+        <h1>Поздравляем!</h1>
+        <div>
+          Вы прошли викторину и набрали
+          <span className="score">{score}</span>
+          из
+          <span className="score">{maxScore}</span>
+          возможных баллов
         </div>
-      );
-    }
+        <div className="start-quiz-btn" onClick={this.startQuizHandler}>
+          Попробовать еще раз!
+        </div>
+      </div>
+    );
+
+    const currentPanel = isFinal ? congratulationPanel : workPanel;
+
+    return (
+      <div className="app">
+        <AppHeader score={score} />
+        <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
+        {currentPanel}
+      </div>
+    );
   }
 }
 

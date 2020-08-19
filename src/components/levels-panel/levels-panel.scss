@@ -1,0 +1,20 @@
+.levels-panel {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.level-item {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    list-style-type: none;
+    background-color: #008966;
+    padding: 1rem;
+    &.active {
+        background-color: #00bc8c;    
+    }
+}

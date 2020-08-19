@@ -1,0 +1,41 @@
+.question-panel {
+  display: flex;
+  padding: 10px;
+  @media (max-width: 570px) {
+    flex-direction: column;
+    text-align: center;
+  }  
+  &__image {
+    .bird-image {
+      width: 200px;
+      height: 155px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+  }
+  &__info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: fle
+    
+    
+    x-start;
+    align-items: stretch;
+    margin-left: 10px;
+    &-name {
+      padding: 10px;
+      font-size: 24px;        
+      border-bottom: 1px solid silver;
+    }
+    &-audio {
+      margin-top: 20px;
+      .audio {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+  

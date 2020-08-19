@@ -1,10 +1,14 @@
 import React from 'react';
-import './app-footer.css';
+import './app-footer.scss';
 
-const AppFooter = ({ onNextLevelClick }) => {
+const AppFooter = ({ isLevelGuessed, onNextLevelClick }) => {
+  let classNames = 'app-footer';
+  if (isLevelGuessed) {
+    classNames += ' active';
+  }
   return (
-    <div className="app-footer">
-      <button onClick={onNextLevelClick}>Next level</button>
+    <div className={classNames} onClick={onNextLevelClick}>
+      Next level
     </div>
   );
 };
