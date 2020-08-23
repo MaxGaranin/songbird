@@ -8,7 +8,7 @@ const AppFooter = ({ isLevelGuessed, onNextLevelClick }) => {
   }
   return (
     <div className={classNames} onClick={onNextLevelClick}>
-      Next level
+      Следующий уровень
     </div>
   );
 };
