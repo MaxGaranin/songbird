@@ -10,6 +10,7 @@ import { getRandomIntInclusive } from './../../utils/utils';
 
 import winAudio from './../../assets/audio/win.mp3';
 import errorAudio from './../../assets/audio/error.mp3';
+import 'bootswatch/dist/slate/bootstrap.min.css';
 import './app.scss';
 
 const levels = [
