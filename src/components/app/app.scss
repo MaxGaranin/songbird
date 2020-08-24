@@ -32,6 +32,11 @@
 
 .birds-panel {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
