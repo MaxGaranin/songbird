@@ -55,7 +55,13 @@ class App extends Component {
     if (!this.state.isLevelGuessed) return;
 
     this.setState(
-      ({ currentLevelIndex, levelScore, currentBird, isLevelGuessed, isFinal }) => {
+      ({
+        currentLevelIndex,
+        levelScore,
+        currentBird,
+        isLevelGuessed,
+        isFinal,
+      }) => {
         currentLevelIndex++;
         if (currentLevelIndex > maxLevelIndex) {
           currentLevelIndex--;
@@ -149,34 +155,8 @@ class App extends Component {
     audio.play();
   }
 
-  render() {
-    const {
-      levels,
-      currentLevelIndex,
-      birds,
-      targetBird,
-      score,
-      currentBird,
-      isLevelGuessed,
-      isFinal,
-    } = this.state;
-
-    const workPanel = (
-      <>
-        <QuestionPanel
-          targetBird={targetBird}
-          isLevelGuessed={isLevelGuessed}
-        />
-        <div className="birds-panel">
-          <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
-          <BirdInfoPanel currentBird={currentBird} />
-        </div>
-        <AppFooter
-          isLevelGuessed={isLevelGuessed}
-          onNextLevelClick={this.nextLevelHandler}
-        />
-      </>
-    );
+  getCongratulationPanel = () => {
+    const { score } = this.state;
 
     const congratulationPanel = (
       <div className="congratulation-panel">
@@ -194,12 +174,44 @@ class App extends Component {
       </div>
     );
 
-    const currentPanel = isFinal ? congratulationPanel : workPanel;
+    return congratulationPanel;
+  };
+
+  render() {
+    const {
+      levels,
+      currentLevelIndex,
+      birds,
+      targetBird,
+      score,
+      currentBird,
+      isLevelGuessed,
+      isFinal,
+    } = this.state;
+
+    const workPanel = (
+      <>
+        <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
+        <QuestionPanel
+          targetBird={targetBird}
+          isLevelGuessed={isLevelGuessed}
+        />
+        <div className="birds-panel">
+          <BirdsList birds={birds} onBirdClick={this.birdClickHandler} />
+          <BirdInfoPanel currentBird={currentBird} />
+        </div>
+        <AppFooter
+          isLevelGuessed={isLevelGuessed}
+          onNextLevelClick={this.nextLevelHandler}
+        />
+      </>
+    );
+
+    const currentPanel = isFinal ? this.getCongratulationPanel() : workPanel;
 
     return (
       <div className="app">
         <AppHeader score={score} />
-        <LevelsPanel levels={levels} currentLevelIndex={currentLevelIndex} />
         {currentPanel}
       </div>
     );
