@@ -23,7 +23,7 @@ const BirdInfoPanel = ({ currentBird }) => {
             <div className="bird-info__name">{currentBird.name}</div>
             <div className="bird-info__species">{currentBird.species}</div>
             <div className="bird-info__audio">
-              <audio src={currentBird.audio} controls></audio>
+              <audio className="audio" src={currentBird.audio} controls></audio>
             </div>
           </div>
         </div>

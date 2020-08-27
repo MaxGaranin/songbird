@@ -1,11 +1,17 @@
+@import './../../assets/common.scss';
+
 .question-panel {
   display: flex;
   padding: 10px;
-  @media (max-width: 576px) {
+  @media (max-width: $sm) {
     flex-direction: column;
-    text-align: center;
+    padding: 10px 0;
   }  
   &__image {
+    display: flex;    
+    @media (max-width: $sm) {
+      justify-content: center;
+    }
     .bird-image {
       width: 200px;
       height: 155px;
@@ -17,16 +23,19 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     align-items: stretch;
     margin-left: 10px;
     &-name {
       padding: 10px;
       font-size: 24px;        
       border-bottom: 1px solid silver;
+      display: flex;
+      @media (max-width: $sm) {
+        justify-content: center;
+      }
     }
     &-audio {
-      margin-top: 20px;
+      margin-top: 15px;
       .audio {
         width: 100%;
       }

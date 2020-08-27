@@ -8,7 +8,7 @@ import AppFooter from './../app-footer';
 import birdsData from './../../data/birds-data';
 import { getRandomIntInclusive } from './../../utils/utils';
 
-import winAudio from './../../assets/audio/win.mp3';
+import successAudio from './../../assets/audio/success.mp3';
 import errorAudio from './../../assets/audio/error.mp3';
 import 'bootswatch/dist/slate/bootstrap.min.css';
 import './app.scss';
@@ -149,7 +149,7 @@ class App extends Component {
   };
 
   playStatusSound(status) {
-    const src = status === 1 ? winAudio : errorAudio;
+    const src = status === 1 ? successAudio : errorAudio;
     const audio = new Audio(src);
     audio.currentTime = 0;
     audio.play();

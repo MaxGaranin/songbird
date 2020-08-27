@@ -1,3 +1,5 @@
+@import './../../assets/common.scss';
+
 .levels-panel {
     display: flex;
     justify-content: space-around;
@@ -5,6 +7,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    color: $levels-color;
 }
 
 .level-item {
@@ -12,9 +15,9 @@
     flex-shrink: 1;
     flex-basis: auto;
     list-style-type: none;
-    background-color: #008966;
+    background-color: $levels-bg-color;
     padding: 1rem;
     &.active {
-        background-color: #00bc8c;    
+        background-color: $levels-active-bg-color;    
     }
 }
