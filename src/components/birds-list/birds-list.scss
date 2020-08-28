@@ -1,8 +1,13 @@
+@import './../../assets/common.scss';
+
 .birds-list {
+  background-color: $panel-bg-color;
   flex: 1 1 50%;
-  margin: 10px;
+  @media (max-width: $sm) {
+    flex: 1 1 100%;
+  }
   padding: 0;
-  border: 0 solid silver;
+  border: 0 solid $border-color;
   border-width: 0 0 1px 1px;
 }
 
@@ -10,7 +15,7 @@
   list-style-type: none;
   cursor: pointer;
   padding: 10px;
-  border: 0 solid silver;
+  border: 0 solid $border-color;
   border-width: 1px 1px 0 0;
 }
 

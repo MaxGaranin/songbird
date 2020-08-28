@@ -1,19 +1,21 @@
 @import './../../assets/common.scss';
 
 .bird-info-panel {
+  background-color: $panel-bg-color;
   flex: 1 1 50%;
-  @media (max-width: $sm) {
-    flex: 1 1 100%;
-  }
   flex-direction: column;
   border: 1px solid silver;
   border-radius: 5px;
-  margin: 10px;
+  margin-left: 20px;
   padding: 10px;
   display: flex;
+  @media (max-width: $md) {
+    flex: 1 1 100%;
+    margin-left: 0;
+  }
   &__main {
     display: flex;
-    @media (max-width: $sm) {
+    @media (max-width: $md) {
       flex-direction: column;
       margin: 10px 0;
     }
@@ -22,7 +24,7 @@
       height: 155px;
       border-radius: 10px;
       object-fit: cover;
-      @media (max-width: $sm) {
+      @media (max-width: $md) {
         align-self: center;
       }
     }
@@ -37,7 +39,7 @@
         font-size: 24px;
         font-weight: bold;
         display: flex;
-        @media (max-width: $sm) {
+        @media (max-width: $md) {
           justify-content: center;
         }
       }
@@ -45,7 +47,7 @@
         margin-top: 10px;
         border-bottom: 1px solid silver;
         display: flex;
-        @media (max-width: $sm) {
+        @media (max-width: $md) {
           justify-content: center;
         }
       }
@@ -64,15 +66,20 @@
 }
 
 .bird-info-empty {
+  background-color: $panel-bg-color;
   height: 250px;
+  margin-left: 20px;
   flex: 1 1 50%;
-  border: 1px solid silver;
-  border-radius: 5px;
-  margin: 10px;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (max-width: $md) {
+    flex: 1 1 100%;
+    margin-left: 0;
+  }  
   & span {
     display: block;
   }

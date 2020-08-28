@@ -1,23 +1,23 @@
-@import './../../assets/common.scss';
+@import "./../../assets/common.scss";
 
 .levels-panel {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: $levels-color;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: $menu-color;
 }
 
 .level-item {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: auto;
-    list-style-type: none;
-    background-color: $levels-bg-color;
-    padding: 1rem;
-    &.active {
-        background-color: $levels-active-bg-color;    
-    }
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  list-style-type: none;
+  background-color: $menu-bg-color;
+  padding: 1rem;
+  &.active {
+    background-color: $menu-active-bg-color;
+  }
 }
