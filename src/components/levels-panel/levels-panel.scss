@@ -20,4 +20,12 @@
   &.active {
     background-color: $menu-active-bg-color;
   }
+  &:first-child {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+  &:last-child {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
 }
