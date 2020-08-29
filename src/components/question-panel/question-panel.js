@@ -1,17 +1,12 @@
-import React, {useRef} from 'react';
+import React from 'react';
 
 import './question-panel.scss';
 import stubImage from './../../assets/img/stub-bird.jpg';
+import AudioPlayer from '../audio-player/audio-player';
 
 const QuestionPanel = ({ targetBird, isLevelGuessed }) => {
-  const audioRef = useRef(null);
-
   const imageSrc = isLevelGuessed ? targetBird.image : stubImage;
   const birdName = isLevelGuessed ? targetBird.name : '**********';
-
-  if (isLevelGuessed) {
-    audioRef.current.pause();
-  }
 
   return (
     <div className="question-panel">
@@ -23,12 +18,11 @@ const QuestionPanel = ({ targetBird, isLevelGuessed }) => {
           <span>{birdName}</span>
         </div>
         <div className="question-panel__info-audio">
-          <audio
+          <AudioPlayer
             className="audio"
-            ref={audioRef}
             src={targetBird.audio}
-            controls
-          ></audio>
+            isPause={isLevelGuessed}
+          ></AudioPlayer>
         </div>
       </div>
     </div>
