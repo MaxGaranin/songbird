@@ -6,12 +6,12 @@ body {
 
 .app {
   max-width: 1000px;
-  min-width: 320px;
+  min-width: 300px;
   width: 100vw;
   height: 100vh;
   max-height: 800px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 10px;
   @media (max-width: $md) {
     max-height: 100vh;
     max-width: 100%;
