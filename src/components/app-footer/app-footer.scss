@@ -1,0 +1,16 @@
+@import './../../assets/common.scss';
+
+.app-footer-btn {
+  cursor: pointer;
+  background-color: $panel-bg-color;
+  color: $border-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  margin: 20px 0;
+  text-align: center;
+  padding: 5px;
+  &.active {
+    background-color: $menu-bg-color;
+    color: $menu-color;
+  }
+}

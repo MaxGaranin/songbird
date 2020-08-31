@@ -1,0 +1,31 @@
+@import "./../../assets/common.scss";
+
+.levels-panel {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: $menu-color;
+}
+
+.level-item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  list-style-type: none;
+  background-color: $menu-bg-color;
+  padding: 1rem;
+  &.active {
+    background-color: $menu-active-bg-color;
+  }
+  &:first-child {
+    border-top-left-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+  }
+  &:last-child {
+    border-top-right-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}

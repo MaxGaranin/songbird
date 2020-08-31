@@ -1,0 +1,52 @@
+@import './../../assets/common.scss';
+
+.question-panel {
+  background-color: $panel-bg-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  display: flex;
+  margin: 20px 0 0 0;
+  padding: 10px;
+  @media (max-width: $sm) {
+    flex-direction: column;
+    padding: 10px 0;
+  }  
+  &__image {
+    display: flex;    
+    @media (max-width: $sm) {
+      justify-content: center;
+    }
+    .bird-image {
+      width: 200px;
+      height: 155px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+  }
+  &__info {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: 10px;
+    &-name {
+      padding: 10px;
+      font-size: 24px;   
+      font-weight: bold;     
+      border-bottom: 1px solid silver;
+      display: flex;
+      @media (max-width: $sm) {
+        justify-content: center;
+      }
+    }
+    &-audio {
+      margin-top: 15px;
+      .audio {
+        width: 100%;
+      }
+    }
+  }
+}
+
+
+  
